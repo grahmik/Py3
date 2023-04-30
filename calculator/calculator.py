@@ -1,5 +1,5 @@
 #!/bin/python3
-#M Mike G 4/29/2023
+# Mike G 4/29/2023
 
 ####    Welcome to the calculator!      ####
 ####    I was given the challenge       #### 
