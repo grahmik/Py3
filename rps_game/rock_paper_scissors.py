@@ -211,6 +211,9 @@ while True:
         time.sleep(2)
         play_again = input("Do you want to play again? (Yes or No)").lower()
         if play_again == "yes":
+            # Scores Reset
+            player_score = 0
+            ai_score = 0
             continue
         else:
             print("OKAY! Come back and play me soon!")
@@ -221,6 +224,9 @@ while True:
         time.sleep(2)
         play_again = input("Do you want to play again? (Yes or No) ").lower()
         if play_again == "yes":
+            # Scores Reset
+            player_score = 0
+            ai_score = 0
             continue
         else:
             print("\nOKAY! Come back and play me again, soon!\n")
