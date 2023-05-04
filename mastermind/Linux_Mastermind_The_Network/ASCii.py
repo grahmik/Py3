@@ -45,6 +45,24 @@ you_win = '''
 # # # # # # # # # # # # # #
 '''
 
+you_lose = '''\033[31m
+# # # # # # # # # # # # # # #
+# __   _______ _   _        #
+# \ \ / /  _  | | | |       #
+#  \ V /| | | | | | |       #
+#   \ / | | | | | | |       #
+#   | | \ \_/ / |_| |       #
+#   \_/  \___/ \___/        #
+#                           #
+#  _     _____ _____ _____  #
+# | |   |  _  /  ___|  ___| #
+# | |   | | | \ `--.| |__   #
+# | |   | | | |`--. \  __|  #
+# | |___\ \_/ /\__/ / |___  #
+# \_____/\___/\____/\____/  #
+# # # # # # # # # # # # # # #
+\033[0m'''
+
 # Print functions:
 def welcome():
     for line in mtn.splitlines():
@@ -53,5 +71,10 @@ def welcome():
         
 def win():
     for line in you_win.splitlines():
+        print(line)
+        time.sleep(.1)
+        
+def lose():
+    for line in you_lose.splitlines():
         print(line)
         time.sleep(.1)

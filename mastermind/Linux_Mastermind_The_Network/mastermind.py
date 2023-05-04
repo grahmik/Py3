@@ -1,43 +1,51 @@
 # Mike G 5/3/2023
 
 # Imports
+
 import random
 import time
 import pygame
 from ASCii import win
 from ASCii import welcome
+from ASCii import lose
 
 # Initialize pygame
+
 pygame.mixer.init()
 
 # Load sound files
-welcome_sound = pygame.mixer.Sound('/home/pinkg/Scripts/Python3/mastermind/sounds/intro2.mp3')
-input_sound = pygame.mixer.Sound('/home/pinkg/Scripts/Python3/mastermind/sounds/input.mp3')
-win_sound = pygame.mixer.Sound('/home/pinkg/Scripts/Python3/mastermind/sounds/win.mp3')
-negative_sound = pygame.mixer.Sound('/home/pinkg/Scripts/Python3/mastermind/sounds/negative.mp3')
-bye_sound = pygame.mixer.Sound('/home/pinkg/Scripts/Python3/mastermind/sounds/bye.mp3')
+
+welcome_sound = pygame.mixer.Sound('./sounds/intro2.mp3')
+input_sound = pygame.mixer.Sound('./sounds/input.mp3')
+win_sound = pygame.mixer.Sound('./sounds/win.mp3')
+negative_sound = pygame.mixer.Sound('./sounds/negative.mp3')
+bye_sound = pygame.mixer.Sound('./sounds/bye.mp3')
 
 # Welcome to MASTERMIND
+
 welcome_sound.play()
 welcome()
 time.sleep(1)
 
-
 # Mastermind Lists:
+
 mm_list = ["router", "server", "firewall", "load balancer", "internet", "client", "vpn", 
            "wireless router", "switch"]
 
 mm_solved = random.sample(list(set(mm_list)), 4)
 
+TRIES = 10
+
 
 
 #################### Game Loop ####################
+
 while True:
     
     print(
         "\n\033[34m\033[1mChoose 4 Networking terms:\033[0m\n\n", 
         mm_list, 
-        "\n\n\033[34m\033[1mYou have to place the terms in the correct order!\033[0m"
+        f"\n\n\033[34m\033[1mGuess all 4 in the correct order. You have {TRIES} tries.\033[0m"
     )
     
     # User solve list
@@ -64,19 +72,24 @@ while True:
         play_again = input("\nWould you like to play Mastermind again? (Y/N): ").lower()
         input_sound.play()
         
+    
         while True:
+            
             if play_again == "y":
                 mm_solved = random.sample(list(set(mm_list)), 4)
                 break
+            
             elif play_again == "n":
                 print("\nGoodbye!")
                 bye_sound.play()
                 pygame.time.wait(int(bye_sound.get_length() * 1000))
                 quit()
+                
             else:
                 negative_sound.play()
                 print("\033[31mPlease enter a valid option\033[0m")
                 continue
+            
         continue
         
     elif u_solve != mm_solved:
@@ -115,16 +128,31 @@ while True:
     
     # Asks if the user wants to continue and continues or quits
     while True:
+        
         keep_going = input("\nWould you like to keep going? (Y/N): ").lower()
         input_sound.play()
         
-        if keep_going == "y":   
+        if keep_going == "y":
+            
+            TRIES -= 1
+            
+            if TRIES == 0:
+                
+                print("\nYou lose!")
+                bye_sound.play()
+                lose()
+                time.sleep(1)
+                quit()
+                
             break
+        
         elif keep_going == "n":
+            
             print("\nThanks for playing! Goodbye.")
             bye_sound.play()
             pygame.time.wait(int(bye_sound.get_length() * 1000))
             quit()
+            
         else:
             negative_sound.play()
             print("\033[31mPlease enter a valid option\033[0m")
